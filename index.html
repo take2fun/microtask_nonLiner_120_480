@@ -12,6 +12,7 @@
 //non-liner
 //Good Design
 //random presure
+// 240-360は確認済み，このプログラムも確認済み，デバック用を消せば実装可能，他のやつにコピペしようね
 
 int scene = 1;
 
@@ -60,7 +61,7 @@ void draw() {
     textAlign(CENTER);
     text("Enterキーを押すとスタート", width/2, height/2);
     play_presure = presureList[presure_selecter];
-    text(play_presure,width/2,height/4);
+    //text(play_presure,width/2,height/4);
 
     break;
 
@@ -97,8 +98,8 @@ void draw() {
     text("ご協力ありがとうございます．", width/2, height/4+30);
     text("このページを閉じずに，残したまま，", width/2, height/4+60);
     text("アンケートフォームにお戻りください．", width/2, height/4+90);
-    println(count_answer);
-    println(count_time);
+    //println(count_answer);
+    //println(count_time);
     noLoop();
     document.getElementById('presure_area').innerHTML = "タイプ："+play_presure;
     document.getElementById('answer_area').innerHTML = "回答数："+count_answer;
@@ -114,13 +115,13 @@ void timer() {
       time = millis() - base_time;
       time = time/1000;
       trust_time = time;
-      //text("true_time:"+int(time), width/2, height/2-20);
-      if (time < 240) {
+      //text("true_time:"+int(time), width/2, height/2+10);
+      if (time < 120) {
         f = 1;
-        time = time * 3/2;
+        time = time * 4;
         //text("fast_time:"+int(time), width/2, height/2);
         //text("fast", width/2, height/2-200);
-      } else if (time >= 240) {
+      } else if (time >= 120) {
         f = 2;
         if (base_timeA == 0) {
 
@@ -129,8 +130,8 @@ void timer() {
         time2 = millis() - base_timeA;
         time2 = time2/1000;
 
-        time2 = time2 * 2/3;
-        time2 = time2 + 360;
+        time2 = time2 * 1/4;
+        time2 = time2 + 480;
         //text("slow_time:"+int(t), width/2, height/2);
         //text("slow", width/2, height/2-200);
       }
@@ -141,24 +142,23 @@ void timer() {
     time = millis() - base_time;
     time = time/1000;
     trust_time = time;
-    //text("true_time:"+int(time), width/2, height/2-20);
-    if (time < 360) {
+    //text("true_time:"+int(time), width/2, height/2+10);
+    if (time < 480) {
       f = 1;
-      time = time * 2/3;
+      time = time * 1/4;
       //text("slow_time:"+int(time), width/2, height/2);
       //text("fast", width/2, height/2-200);
-    } else if (time >= 360) {
+    } else if (time >= 480) {
       f = 2;
       if (base_timeA == 0) {
-
         base_timeA = millis();
       }
       time2 = millis() - base_timeA;
       time2 = time2/1000;
 
-      time2 = time2 * 3/2;
-      time2 = time2 + 240;
-      //text("fast_time:"+int(t), width/2, height/2);
+      time2 = time2 * 4;
+      time2 = time2 + 480;
+      //text("fast_time:"+int(time), width/2, height/2);
       //text("slow", width/2, height/2-200);
     }
   }
