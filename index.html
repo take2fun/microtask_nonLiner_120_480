@@ -123,12 +123,12 @@
             var time2Element = document.getElementById("time2");
             var timerElement = document.getElementById("timer")
 
-            timeElement.innerHTML = hour + ":" + min + ":" + sec;
+            //timeElement.innerHTML = hour + ":" + min + ":" + sec;
             // console.log(hour);
             // console.log(typeof (hour));
             //console.log(startHour);
             //console.log(hour - startHour);
-            time2Element.innerHTML = (hour - startHour) + ":" + (min - startMin) + ":" + (sec - startSec);
+            //time2Element.innerHTML = (hour - startHour) + ":" + (min - startMin) + ":" + (sec - startSec);
 
             //開始時刻と現在時刻の差
             var timerHour = hour - startHour;
@@ -152,7 +152,7 @@
 
             //非線形時計
             second = makeNonliner();
-            timerElement.innerHTML = second;
+            //timerElement.innerHTML = second;
 
             drawRect();
             if (second > 600) {
@@ -236,11 +236,11 @@
     <p id="wordA_area">筆箱　鉛筆　消しゴム　定規　赤ペン　シャーペン</p>
     <p id="wordB_area">サッカー　野球　バスケ　バレー　陸上　テニス　水泳</p>
   </font> -->
-    <div id="clock">
+<!--     <div id="clock">
         <div id="time">--:--:--</div>
         <div id="time2">--:--:--</div>
         <div id="timer"></div>
-    </div>
+    </div> -->
     <font size="6">
         <div id="result_area"></div>
         <div id="presure_area"></div>
