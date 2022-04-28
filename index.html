@@ -18,7 +18,7 @@
         var time_count = [];
         var search_count = [];
         var rank_count = [];
-        var presure = ["High", "Low"];
+        var presure = ["HP", "LP"];
         var selected_presure = presure[Math.floor(Math.random() * presure.length)];
 
         //タイマー用変数
@@ -228,7 +228,7 @@
                 var timeCount = document.getElementById("time_area");
 
                 result.innerHTML = "結果";
-                presureType.innerHTML = selected_presure;
+                presureType.innerHTML = "タイプ" + selected_presure;
                 answerCount.innerHTML = "回答数" + answer_count;
                 timeCount.innerHTML = "回答時間" + time_count;
             } else {
