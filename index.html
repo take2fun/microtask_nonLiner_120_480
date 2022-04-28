@@ -9,12 +9,15 @@
         var n = 0;
         var second = 0;
         var true_second = 0;
+        var word_count = 0;
         var t = 1;
         var count = 0;
         var before_time = 0;
         var answer_time = 0;
         var answer_count = 0;
         var time_count = [];
+        var search_count = [];
+        var rank_count = [];
         var presure = ["High", "Low"];
         var selected_presure = presure[Math.floor(Math.random() * presure.length)];
 
@@ -26,9 +29,32 @@
 
         //語群
         var Word = [["筆箱", 1], ["鉛筆", 3], ["消しゴム", 2], ["定規", 4], ["赤ペン", 1], ["シャーペン", 3],
-        ["サッカー", 2], ["野球", 4], ["バスケ", 1], ["バレー", 3], ["陸上", 2], ["テニス", 4], ["水泳", 2]];
+        ["サッカー", 2], ["野球", 4], ["バスケ", 1], ["バレー", 3], ["陸上", 2], ["テニス", 4], ["水泳", 2],
+        ["体操", 2], ["レスリング", 4], ["自転車", 1], ["ボート", 3], ["ボクシング", 2], ["近代五種", 4],
+        ["バドミントン", 2], ["カヌー", 4], ["空手", 1], ["サーフィン", 3], ["ゴルフ", 2], ["卓球", 4],
+        ["柔道", 2], ["馬術", 4], ["トライアスロン", 1], ["アーチェリー", 3], ["テコンドー", 2], ["ラグビー", 4],
+        ["マグロ", 2], ["イカ", 4], ["タコ", 1], ["アジ", 3], ["タイ", 2], ["エビ", 4],
+        ["巻雲", 2], ["高積雲", 4], ["積乱雲", 1], ["乱層雲", 3], ["層積雲", 2], ["高層雲", 4],
+        ["晴天", 2], ["雨天", 4], ["曇天", 1], ["日本", 3], ["アメリカ", 2], ["イギリス", 4],
+        ["中国", 2], ["フランス", 4], ["韓国", 1], ["オーストラリア", 3], ["シンガポール", 2], ["イタリア", 4]];
 
         document.addEventListener('keypress', keypress_ivent);
+
+        function onClickCopy() {
+            // コピー対象のpタグオブジェクトを取得する.
+            // let pTag = document.getElementById('copyTarget');
+            // コピー内容を選択する.
+            let range = document.createRange();
+            var copy_word = Word[count][0];
+            range.selectNodeContents(searchWord);
+            let selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            // 選択したものをコピーする.
+            document.execCommand('copy');
+            // コピー内容の選択を解除する.
+            selection.removeAllRanges();
+        }
 
         function makeNonliner(s) {
             if (selected_presure == "High") {
@@ -56,20 +82,57 @@
         };
 
         function keypress_ivent(e) {
-            if (e.key === 'Enter') {
+            if (true_second - before_time < 3) {
+            } else {
+                if (e.key === 'Enter') {
+                    Word[count][1] = Word[count][1] + 1;
+                    if (Word[count][1] > 4) {
+                        Word[count][1] = 1;
+                    }
+                    //count = getRandam(0, 12);
+                    count += 1;
+                    if (count > 54) {
+                        count = 0;
+                    }
+
+                }
+
+                answer_time = true_second - before_time;
+                before_time = true_second;
+                answer_count += 1;
+                time_count.push(answer_time);
+                search_count.push(Word[count][0]);
+                rank_count.push(Word[count][1] + "番目");
+                searchWord.innerHTML = Word[count][0];
+                searchRank.innerHTML = Word[count][1] + "番目";
+            }
+            return false;
+        }
+
+        function keypress() {
+            if (true_second - before_time < 3) {
+
+            } else {
                 Word[count][1] = Word[count][1] + 1;
                 if (Word[count][1] > 4) {
                     Word[count][1] = 1;
                 }
-                count = getRandam(0, 12);
-            }
+                //count = getRandam(0, 12);
+                count += 1;
+                if (count > 54) {
+                    count = 0;
+                }
 
-            answer_time = true_second - before_time;
-            before_time = true_second;
-            answer_count += 1;
-            time_count.push(answer_time);
-            searchWord.innerHTML = Word[count][0];
-            searchRank.innerHTML = Word[count][1] + "番目";
+
+                answer_time = true_second - before_time;
+                before_time = true_second;
+                answer_count += 1;
+                time_count.push(answer_time);
+                search_count.push(Word[count][0]);
+                rank_count.push(Word[count][1] + "番目");
+                searchWord.innerHTML = Word[count][0];
+                searchRank.innerHTML = Word[count][1] + "番目";
+            }
 
             return false;
         }
@@ -185,7 +248,6 @@
             searchRank.innerHTML = Word[count][1] + "番目";
 
             //console.log(selected_presure);
-
             clock();
         }
     </script>
@@ -230,13 +292,21 @@
         <div style="position: absolute;top:130px;left: 425px;">
             <div id="searchRank"></div>
         </div>
+        <div id="area">
+            <div style="position: absolute;top:165px;left: 145px;">
+                <input type="button" id="copy" value="コピーする" onclick="onClickCopy();">
+            </div>
+            <div style="position: absolute;top:165px;left: 420px;">
+                <input type="button" id="next" value="次へ" onclick="keypress();">
+            </div>
+        </div>
     </font>
     <!-- <font size="5">
     <p id="worfList_area">語群</p>
     <p id="wordA_area">筆箱　鉛筆　消しゴム　定規　赤ペン　シャーペン</p>
     <p id="wordB_area">サッカー　野球　バスケ　バレー　陸上　テニス　水泳</p>
   </font> -->
-<!--     <div id="clock">
+    <!-- <div id="clock">
         <div id="time">--:--:--</div>
         <div id="time2">--:--:--</div>
         <div id="timer"></div>
