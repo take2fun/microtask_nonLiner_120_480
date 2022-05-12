@@ -57,14 +57,14 @@
         }
 
         function makeNonliner(s) {
-            if (selected_presure == "High") {
+            if (selected_presure == "HP") {
                 if (second < 120) {
                     second = second * 4;
                 } else if (second >= 120) {
                     second = 480 + t * 1 / 4;
                     t += 1;
                 }
-            } else if (selected_presure == "Low") {
+            } else if (selected_presure == "LP") {
                 if (second < 480) {
                     second = second * 1 / 4;
                 } else if (second >= 480) {
